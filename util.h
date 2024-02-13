@@ -13,20 +13,31 @@
 template <typename T>
 std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 {
+ const std::set<T> *smaller, *larger;
+    if (s1.size() < s2.size()) {
+        smaller = &s1;
+        larger = &s2;
+    } else {
+        smaller = &s2;
+        larger = &s1;
+    }
 
+    std::set<T> ans;
+    for (const T& element : *smaller) {
+        if (larger->find(element) != larger->end()) {
+            ans.insert(element);
+        }
+    }
 
-
-
-
+    return ans;
 }
+
 template <typename T>
 std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 {
-
-
-
-
-
+  std::set<T> ans = s1; // Start with all elements from s1
+  ans.insert(s2.begin(), s2.end()); // Insert elements from s2, duplicates are automatically handled
+  return ans;
 }
 
 /***********************************************/

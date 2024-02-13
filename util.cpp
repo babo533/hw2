@@ -15,15 +15,28 @@ std::string convToLower(std::string src)
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
+  std::string word = ""; 
+  std::set<std::string> relevantWords;
 
+  rawWords = convToLower(rawWords);
 
+  for (char c : rawWords) {
+    if (std::ispunct(c)) {
+      if (!word.empty() && word.length() >= 2) {
+        relevantWords.insert(word);
+        word.clear();
+      }
+    }
+    else {
+      word += c;
+    }
+  }
 
+  if (!word.empty() && word.length() >= 2) {
+    relevantWords.insert(word);
+  }
 
-
-
-
-
-
+  return relevantWords;
 
 }
 

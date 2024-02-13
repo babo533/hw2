@@ -97,21 +97,35 @@ void MyDataStore::displayUserCart(string userName) {
     }
 }
 
-void MyDataStore::purchaseUserCart(string userName) {
-    if(userCarts.find(userName) == userCarts.end()) {
-        cerr << "User not found" << endl;
+void MyDataStore::purchaseUserCart(std::string userName) {
+    // Check if the user exists and retrieve the User object
+    User* user = nullptr;
+    for(auto it = registeredUsers.begin(); it != registeredUsers.end(); ++it) {
+        if((*it)->getName() == userName) {
+            user = *it;
+            break;
+        }
+    }
+
+    // If user not found, print an error and return
+    if(user == nullptr) {
+        std::cerr << "User not found" << std::endl;
         return;
     }
-    User* user = /* retrieve the User object for userName */;
-    deque<Product*>& cart = userCarts[userName];
-    for(auto it = cart.begin(); it != cart.end();) {
-        Product* product = *it;
-        if(product->getQty() > 0 && user->getBalance() >= product->getPrice()) {
-            user->deductAmount(product->getPrice());
-            product->subtractQty(1);
-            it = cart.erase(it);
-        } else {
-            ++it;
+
+    // Proceed with the purchase if the user is found
+    if(userCarts.find(userName) != userCarts.end()) {
+        std::deque<Product*>& cart = userCarts[userName];
+        for(auto it = cart.begin(); it != cart.end();) {
+            if((*it)->getQty() > 0 && user->getBalance() >= (*it)->getPrice()) {
+                user->deductAmount((*it)->getPrice());
+                (*it)->subtractQty(1);
+                it = cart.erase(it); // Successful purchase, remove item from cart
+            } else {
+                ++it; // Move to next item if not enough stock or funds
+            }
         }
+    } else {
+        std::cerr << "Cart is empty or does not exist for the user" << std::endl;
     }
 }

@@ -101,7 +101,44 @@ int main(int argc, char* argv[])
                 done = true;
             }
 	    /* Add support for other commands here */
-
+            else if (cmd == "ADD") {
+              string username = "";
+              size_t index = 0;
+              if (ss >> username) {
+                if (ss >> index) {
+                  if (index <= hits.size() && index > 0) {
+                    ds.addProductToCart(username, hits[index - 1]);
+                  }
+                  else {
+                    cout << "Invalid request" << endl;
+                  }
+                }
+                else {
+                  cout << "Invalid request" << endl;
+                }
+              }
+              else {
+                cout << "Invalid request" << endl;
+              }
+            }
+            else if (cmd == "VIEWCART") {
+              string username = "";
+              if (ss >> username) {
+                ds.displayUserCart(username);
+              }
+              else {
+                cout << "Invalid username" << endl;
+              }
+            }
+            else if (cmd == "BUYCART") {
+              string username = "";
+              if (ss >> username) {
+                ds.purchaseUserCart(username);
+              }
+              else {
+                cout << "Invalid username" << endl;
+              }
+            }
 
 
 

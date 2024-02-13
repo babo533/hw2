@@ -1,6 +1,6 @@
 COMPILER=g++
 FLAGS=-g -Wall -std=c++11
-# Uncomment for parser DEBUG
+#Uncomment for parser DEBUG
 #DEFS=-DDEBUG
 
 OBJECTS=mydatastore.o movie.o clothing.o book.o util.o product_parser.o db_parser.o user.o amazon.o product.o

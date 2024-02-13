@@ -109,12 +109,6 @@ int main(int argc, char* argv[])
                   if (index <= hits.size() && index > 0) {
                     ds.addProductToCart(username, hits[index - 1]);
                   }
-                  else {
-                    cout << "Invalid request" << endl;
-                  }
-                }
-                else {
-                  cout << "Invalid request" << endl;
                 }
               }
               else {

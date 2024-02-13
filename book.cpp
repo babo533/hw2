@@ -47,10 +47,10 @@ using namespace std;
   }
 
   std::string Book::displayString() const {
-    stringstream ans;
-    ans << name_ << "\nAuthor: " << writer_ << " ISBN: " << uniqueID_;
-    ans << "\n" << fixed << setprecision(2) << price_ << " - " << qty_ << " left." << endl; 
-    return ans.str();
+    stringstream ss;
+    ss << name_ << "\nAuthor: " << writer_ << " ISBN: " << uniqueID_;
+    ss << "\n" << fixed << setprecision(2) << price_ << " - " << qty_ << " left." << endl; 
+    return ss.str();
   }
 
   void Book::dump(std::ostream& os) const {

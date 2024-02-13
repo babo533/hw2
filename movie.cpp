@@ -7,6 +7,7 @@
 #include "util.h"
 #include "product.h"
 
+
 using namespace std;
 
 // Constructor
@@ -39,15 +40,19 @@ bool Movie::isMatch(std::vector<std::string>& searchTerms) const {
 }
 
 std::string Movie::displayString() const {
-    stringstream ss;
-    ss << this->name_ << "\nGenre: " << this->filmGenre_ << " Rating: " << this->filmRating_ << "\n";
-    ss << fixed << setprecision(2) << this->price_ << ", " << this->qty_ << " left.";
+    std::stringstream ss;
+    ss << name_ << "\n" << filmGenre_ << " " << filmRating_;
+    ss << "\n" << std::fixed << std::setprecision(2) << price_ << " - " << qty_ << " left." << std::endl;
     return ss.str();
 }
 
+
+
+
+
 void Movie::dump(std::ostream& os) const {
     Product::dump(os); // Call base class method to output common attributes
-    os << "Genre: " << this->filmGenre_ << "\nRating: " << this->filmRating_ << endl;
+    os << this->filmGenre_ << "\n" << this->filmRating_ << endl;
 }
 
 //getters

@@ -33,23 +33,25 @@ std::string Clothing::getSize() const {
 
 
 std::set<std::string> Clothing::keywords() const {
-  set<string> ans = parseStringToWords(name_);
-  set<string> brnd = parseStringToWords(brand_);
-  ans = setUnion(ans, brnd);
+  set<string> clotheName = parseStringToWords(name_);
+  set<string> brandName = parseStringToWords(brand_);
+  clotheName = setUnion(clotheName, brandName);
   // Not adding size as a keyword unless you decide otherwise
-  return ans;
+  return clotheName;
 }
 
 // Implementation of displayString() from Product interface
 std::string Clothing::displayString() const {
-    stringstream ss;
-    ss << name_ << "\nSize: " << size_ << " Brand: " << brand_ << "\n";
-    ss << fixed << setprecision(2) << price_ << ", " << qty_ << " left.";
+    std::stringstream ss;
+    ss << name_ << "\n" << size_ << " " << brand_;
+    ss << "\n" << std::fixed << std::setprecision(2) << price_ << " - " << qty_ << " left." << std::endl;
     return ss.str();
 }
+
+
 
 // Implementation of dump() from Product interface
 void Clothing::dump(std::ostream& os) const {
     Product::dump(os); // Dump common product info
-    os << "Size: " << size_ << "\nBrand: " << brand_ << endl;
+    os << size_ << "\n" << brand_ << endl;
 }
